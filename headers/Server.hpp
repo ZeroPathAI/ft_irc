@@ -101,6 +101,7 @@ class Server
 		std::string						_privToChannel(std::string ChannelName, std::string message, int i);
 		std::string						_sendToAllUsers( Channel *channel, int senderFd, std::string message);
 		std::string						_getPassword() const;
+		std::string						_executeCommand(std::string command, int i);
 
 	public:
 		Server(std::string Name, int max_online, std::string Port, std::string Password);

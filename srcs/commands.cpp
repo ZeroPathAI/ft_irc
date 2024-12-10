@@ -14,6 +14,13 @@
 
 std::string	Server::_parsing(std::string message, int i)
 {
+	// Check for cmd prefix
+	if (message.substr(0, 3) == "cmd") {
+		if (!this->_clients[i]->getRegistered())
+			return (_printMessage("451", this->_clients[i]->getNickName(), ":You have not registered"));
+		return _executeCommand(message.substr(4), i);
+	}
+
 	Request	request(_splitRequest(message));
 
 	if (request.invalidMessage)

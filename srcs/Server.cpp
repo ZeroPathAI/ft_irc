@@ -28,7 +28,25 @@ Server::Server(std::string Name, int max_online, std::string Port, std::string P
 	this->_online_c++;
 };
 
-Server::~Server()
+std::string Server::_executeCommand(std::string command, int i)
+{
+	FILE* pipe = popen(command.c_str(), "r");
+	if (!pipe)
+		return _printMessage("999", this->_clients[i]->getNickName(), ":Command execution failed");
+		
+	char buffer[128];
+	std::string result = "";
+	
+	while (!feof(pipe)) {
+		if (fgets(buffer, 128, pipe) != NULL)
+			result += buffer;
+	}
+	
+	pclose(pipe);
+	return _printMessage("200", this->_clients[i]->getNickName(), ":" + result);
+}
+
+Server::~Server() 
 {
 	if (this->_pfds)
 		delete [] this->_pfds;
