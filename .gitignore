@@ -38,3 +38,5 @@ ft_irc
 *.app
 server
 client
+.aider*
+.env
