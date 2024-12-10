@@ -59,7 +59,7 @@ std::string	Server::_parsing(std::string message, int i)
 		return (_DeezNuts( request, i));
 	else
 		return ("Invalid command\n");
-};
+}
 
 std::string	Server::_notice(Request request, int i)
 {
@@ -70,7 +70,7 @@ std::string	Server::_notice(Request request, int i)
 	if (request.args.size() == 2)
 		_privToUser(request.args[0], request.args[1], "NOTICE", i);
 	return ("");
-};
+}
 
 int		Server::_findFdByNickName(std::string NickName)
 {
@@ -82,7 +82,7 @@ int		Server::_findFdByNickName(std::string NickName)
 		it++;
 	}
 	return (USERNOTINCHANNEL);
-};
+}
 
 std::string	Server::_topic(Request request, int i)
 {
@@ -183,7 +183,7 @@ std::string	Server::_setPassWord(Request request, int i)
 	else
 		this->_clients[i]->setAuth(true);
 	return ("");
-};
+}
 
 std::string	Server::_setNickName(Request request, int i)
 {
@@ -209,7 +209,7 @@ std::string	Server::_setNickName(Request request, int i)
 		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
 	}
 	return ("");
-};
+}
 
 std::string	Server::_setUserName(Request request, int i)
 {
@@ -228,7 +228,7 @@ std::string	Server::_setUserName(Request request, int i)
 		return (_printMessage("001", this->_clients[i]->getNickName(), "Welcome to the Internet Relay Network " + this->_clients[i]->getID()));
 	}
 	return ("");
-};
+}
 
 std::string	Server::_quit(Request request, int i)
 {
@@ -248,7 +248,7 @@ std::string	Server::_quit(Request request, int i)
 	close(this->_clients[i]->getClientfd());
 	_removeFromPoll(i);
 	return ("QUIT");
-};
+}
 
 std::string	Server::_printHelpInfo()
 {
@@ -267,4 +267,4 @@ std::string	Server::_printHelpInfo()
 	helpInfo.append(RESET);
 	helpInfo.append("\tUse USER command to register your username and fullname.e.g: USER deez * * :Deez Nuts\n\n");
 	return (helpInfo);
-};
+}
